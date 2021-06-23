@@ -18,10 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // // Facilities::factory(10)->create();
-        // // Destinations::factory(10)->create();
-        // Pemilik::factory(10)->create();
-        // // Visitors::factory(10)->create();
-        // Transactions::factory(10)->create();
+        $this->call([
+            PemiliksSeeder::class,
+            VisitorsSeeder::class,
+            DestinationsSeeder::class,
+            FacilitiesSeeder::class,    
+            TransactionsSeeder::class
+        ]);
+        
     }
 }

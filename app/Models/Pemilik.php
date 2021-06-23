@@ -10,4 +10,7 @@ class Pemilik extends Model
     public $timestamps = false;
     use HasFactory;
     
+    public function Destinations(){
+        $this -> hasMany(Destinations::class);
+    }
 }

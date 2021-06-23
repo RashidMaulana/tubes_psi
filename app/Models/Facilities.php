@@ -9,4 +9,12 @@ class Facilities extends Model
 {
     public $timestamps = false;
     use HasFactory;
+
+    public function Transactions(){
+        $this -> belongsTo(Transactions::class);
+    }
+
+    public function Destinations(){
+        $this -> belongsTo(Destinations::class);
+    }
 }

@@ -26,8 +26,8 @@ class TransactionsFactory extends Factory
         return [
             'profits' =>$this->faker->numberBetween(10000,100000),
             'tanggal' => $this->faker->date('Y-m-d','now'),
-            'visitors' => Visitors::factory(),
-            'facilities' => Facilities::factory()
+            'visitors_id' => rand(1,Visitors::count()),
+            'facilities_id' => rand(1,Facilities::count())
         ];
     }
 }

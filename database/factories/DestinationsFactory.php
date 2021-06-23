@@ -26,7 +26,7 @@ class DestinationsFactory extends Factory
             'nama'=>$this->faker->word(),
             'alamat'=>$this->faker->address,
             'telephone'=> $this->faker->phoneNumber,
-            'pemiliks' => Pemilik::factory()
+            'pemiliks_id' => rand(1,Pemilik::count())
         ];
     }
 }

@@ -25,7 +25,7 @@ class facilitiesFactory extends Factory
         return [
             'nama' => $this->faker->word(),
             'jumlah' => $this->faker->numberBetween(1,10),
-            'destinations' => Destinations::factory()
+            'destinations_id' => rand(1,Destinations::count())
         ];
     }
 }
