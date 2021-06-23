@@ -14,6 +14,6 @@ class DestinationsSeeder extends Seeder
      */
     public function run()
     {
-        Destinations::factory(5)->create();
+        Destinations::factory(10)->create();
     }
 }

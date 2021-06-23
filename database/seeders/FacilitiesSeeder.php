@@ -14,6 +14,6 @@ class FacilitiesSeeder extends Seeder
      */
     public function run()
     {
-        Facilities::factory(5)->create();
+        Facilities::factory(50)->create();
     }
 }
