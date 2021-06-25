@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Destinations;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Pemilik;
+use App\Models\Transactions;
+use Illuminate\Support\Facades\DB;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Carbon\Carbon;
+
 class LoginController extends Controller
 {
     /*
@@ -66,8 +71,27 @@ class LoginController extends Controller
     }
 
     function dashboard() {
-        $data = ['LoggedUserInfo'=>Pemilik::where('id','=',session('LoggedUser'))->first()];
-        return view('dashboard',$data);
+        $data = Pemilik::where('id','=',session('LoggedUser'))->first();
+        $destinasi = DB::table('destinations')->where('pemiliks_id',$data->id)->get();
+        foreach($destinasi as $d){
+            $fasilitas = DB::table('facilities')->where('destinations_id','=',$d->id)->get();
+        };
+        foreach($fasilitas as $f){
+            $transaksi = DB::table('transactions')->where('facilities_id','=',$f->id)->get();
+        };
+        dd($transaksi);
+        $bulan = Transactions::select('bulan')->groupBy('bulan')->get()->toArray();
+        $profit = Transactions::select(DB::raw('sum(profits) as profit'))->groupBy('bulan')->get()->toArray();
+        $total = Transactions::sum('profits');
+
+        return view('dashboard',['LoggedUserInfo' => $data,
+         'destinasi' => $destinasi,
+          'fasilitas' => $fasilitas,
+           'transaksi' => $transaksi,
+           'bulan' => json_encode($bulan, JSON_NUMERIC_CHECK),
+           'profit' => json_encode($profit, JSON_NUMERIC_CHECK),
+           'total' => $total
+        ]);
     }
 
     function logout(){

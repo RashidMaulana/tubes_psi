@@ -11,7 +11,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </div><!-- /.col -->
@@ -30,6 +30,8 @@
               <div class="d-flex justify-content-between">
                 <h3 class="card-title">Online Store Visitors</h3>
                 <a href="javascript:void(0);">View Report</a>
+                
+
               </div>
             </div>
             <div class="card-body">
@@ -181,7 +183,12 @@
             <div class="card-body">
               <div class="d-flex">
                 <p class="d-flex flex-column">
-                  <span class="text-bold text-lg">$18,230.00</span>
+                  <span class="text-bold text-lg">
+                    @php
+                      $hasil_rupiah = "Rp " . number_format($total,2,',','.');    
+                    @endphp
+                    {{$hasil_rupiah}}
+                  </span>
                   <span>Sales Over Time</span>
                 </p>
                 <p class="ml-auto d-flex flex-column text-right">
@@ -192,16 +199,13 @@
                 </p>
               </div>
               <!-- /.d-flex -->
-
               <div class="position-relative mb-4">
-                <canvas id="sales-chart" height="200"></canvas>
+                <canvas id="transactions" height="200"></canvas>
               </div>
-
               <div class="d-flex flex-row justify-content-end">
                 <span class="mr-2">
                   <i class="fas fa-square text-primary"></i> This year
                 </span>
-
                 <span>
                   <i class="fas fa-square text-gray"></i> Last year
                 </span>
@@ -270,12 +274,82 @@
   </div>
   <!-- /.content -->
 </div>
+
 @endsection
 @push('custom-script')
-<!-- OPTIONAL SCRIPTS -->
 <script src="{{ asset('') }}assets/plugins/chart.js/Chart.min.js"></script>
-<!-- AdminLTE for demo purposes -->
 <script src="{{ asset('') }}assets/dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('') }}assets/dist/js/pages/dashboard3.js"></script>
+<script>
+  var ticksStyle = {
+     fontColor: '#495057',
+     fontStyle: 'bold'
+   }
+   var mode = 'index'
+   var intersect = true
+   var get_bulan = {!!$bulan!!}
+   var bulan = get_bulan.map(bulan => bulan.bulan);
+    var get_profit = {!!$profit!!}
+    var profit = get_profit.map(profit => profit.profit);
+ 
+   var $salesChart = $('#transactions')
+   // eslint-disable-next-line no-unused-vars
+   var salesChart = new Chart($salesChart, {
+     type: 'bar',
+     data: {
+       labels: bulan,
+       datasets: [
+         {
+           backgroundColor: '#007bff',
+           borderColor: '#007bff',
+           data: profit
+         },
+       ]
+     },
+     options: {
+       maintainAspectRatio: false,
+       tooltips: {
+         mode: mode,
+         intersect: intersect
+       },
+       hover: {
+         mode: mode,
+         intersect: intersect
+       },
+       legend: {
+         display: false
+       },
+       scales: {
+         yAxes: [{
+           // display: false,
+           gridLines: {
+             display: true,
+             lineWidth: '4px',
+             color: 'rgba(0, 0, 0, .2)',
+             zeroLineColor: 'transparent'
+           },
+           ticks: $.extend({
+             beginAtZero: true,
+ 
+             // Include a dollar sign in the ticks
+             callback: function (value) {
+               if (value >= 100000) {
+                value = new Intl.NumberFormat('id-ID',{ style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(value);
+                 console.log(value);
+               }
+               return  value
+             }
+           }, ticksStyle)
+         }],
+         xAxes: [{
+           display: true,
+           gridLines: {
+             display: false
+           },
+           ticks: ticksStyle
+         }]
+       }
+     }
+   });
+   </script>
 @endpush

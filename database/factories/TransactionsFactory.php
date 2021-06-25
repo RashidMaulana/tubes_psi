@@ -25,7 +25,8 @@ class TransactionsFactory extends Factory
     {
         return [
             'profits' =>$this->faker->numberBetween(10000,100000),
-            'tanggal' => $this->faker->date('Y-m-d','now'),
+            'tanggal' => $this->faker->dateTimeThisYear($max = 'now', $timezone = null),
+            // 'bulan' => $this->month($max = 'now'),
             'visitors_id' => rand(1,Visitors::count()),
             'facilities_id' => rand(1,Facilities::count())
         ];
