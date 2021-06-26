@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/', 'pages.auth.login');
 Auth::routes();
 Route::post('auth/check', [LoginController::class,'check']) ->name('auth.check');
 Route::get('/auth/logout',[LoginController::class, 'logout']) ->name('auth.logout');

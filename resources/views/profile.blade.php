@@ -32,7 +32,7 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="{{ asset('') }}assets/dist/img/user2-160x160.jpg"
+                       src="{{ asset('assets/dist/img/user2-160x160.jpg') }}"
                        alt="User profile picture">
                 </div>
                 <h3 class="profile-username text-center">{{ $LoggedUserInfo ['nama']}}</h3>
@@ -85,9 +85,9 @@
 @endsection
 @push('custom-script')
 <!-- OPTIONAL SCRIPTS -->
-<script src="{{ asset('') }}assets/plugins/chart.js/Chart.min.js"></script>
+<script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('') }}assets/dist/js/demo.js"></script>
+<script src="{{ asset('assets/dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('') }}assets/dist/js/pages/dashboard3.js"></script>
+<script src="{{ asset('assets/dist/js/pages/dashboard3.js') }}"></script>
 @endpush
