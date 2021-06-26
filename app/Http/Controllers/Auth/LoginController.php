@@ -72,6 +72,7 @@ class LoginController extends Controller
 
     function dashboard() {
         $data = Pemilik::where('id','=',session('LoggedUser'))->first();
+        // dd($data);
         // $destinasi = DB::table('destinations')->where('pemiliks_id',$data->id)->get();
         $destinasi = DB::table('transactions')
         ->join('facilities as f','transactions.facilities_id','f.id')
@@ -86,10 +87,23 @@ class LoginController extends Controller
         // for ($i=0; $i <count($fasilitas) ; $i++) { 
         //     $transaksi = DB::table('transactions')->where('facilities_id','=',$fasilitas[$i]->id)->get();
         // }
-        $visitor = Transactions::select(DB::raw('sum(visitors_id) as visitor'))->groupBy('bulan')->get()->toArray();
-        $bulan = Transactions::select('bulan')->groupBy('bulan')->orderBy('tanggal','ASC')->get()->toArray();
-        $profit = Transactions::select(DB::raw('sum(profits) as profit'))->groupBy('bulan')->get()->toArray();
-        $total = Transactions::sum('profits');
+        $visitor = Transactions::select(DB::raw('sum(visitors_id) as visitor'))
+                                            ->join('facilities as f','transactions.facilities_id','f.id')
+                                            ->join('destinations as d','f.destinations_id','d.id')
+                                            ->where('d.pemiliks_id',$data->id)->groupBy('bulan')->get()->toArray();
+
+        $bulan = Transactions::select('bulan')->join('facilities as f','transactions.facilities_id','f.id')
+                                              ->join('destinations as d','f.destinations_id','d.id')
+                                              ->where('d.pemiliks_id',$data->id)->groupBy('bulan')->orderBy('tanggal','ASC')->get()->toArray();
+
+        $profit = Transactions::select(DB::raw('sum(profits) as profit'))
+                                        ->join('facilities as f','transactions.facilities_id','f.id')
+                                        ->join('destinations as d','f.destinations_id','d.id')
+                                        ->where('d.pemiliks_id',$data->id)->groupBy('bulan')->get()->toArray();
+        $total = Transactions::join('facilities as f','transactions.facilities_id','f.id')
+                             ->join('destinations as d','f.destinations_id','d.id')
+                             ->where('d.pemiliks_id',$data->id)->sum('profits');
+
         return view('dashboard',['LoggedUserInfo' => $data,
            'destinasi' => $destinasi,
            'bulan' => json_encode($bulan, JSON_NUMERIC_CHECK),
