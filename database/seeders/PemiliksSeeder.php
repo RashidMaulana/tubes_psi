@@ -14,6 +14,6 @@ class PemiliksSeeder extends Seeder
      */
     public function run()
     {
-        Pemilik::factory(5)->create();
+        Pemilik::factory(10)->create();
     }
 }
