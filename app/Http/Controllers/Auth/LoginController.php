@@ -79,6 +79,7 @@ class LoginController extends Controller
         ->join('destinations as d','f.destinations_id','d.id')
         ->where('d.pemiliks_id',$data->id)
         ->get();
+     
         // dd($destinasi);
         // foreach($destinasi as $d){
         //     $fasilitas = DB::table('facilities')->where('destinations_id','=',$d->id)->get();
