@@ -55,7 +55,7 @@
           <div class="card">
             <div class="card-header border-0">
               <div class="d-flex justify-content-between">
-                <h3 class="card-title">Sales</h3>
+                <h3 class="card-title">Keuntungan Penjualan</h3>
                 <a href="javascript:void(0);">View Report</a>
               </div>
             </div>
@@ -68,13 +68,6 @@
                     @endphp
                     {{$hasil_rupiah}}
                   </span>
-                  <span>Sales Over Time</span>
-                </p>
-                <p class="ml-auto d-flex flex-column text-right">
-                  <span class="text-success">
-                    <i class="fas fa-arrow-up"></i> 33.1%
-                  </span>
-                  <span class="text-muted">Since last month</span>
                 </p>
               </div>
               <!-- /.d-flex -->
@@ -83,10 +76,7 @@
               </div>
               <div class="d-flex flex-row justify-content-end">
                 <span class="mr-2">
-                  <i class="fas fa-square text-primary"></i> This year
-                </span>
-                <span>
-                  <i class="fas fa-square text-gray"></i> Last year
+                  <i class="fas fa-square text-primary"></i> Keuntungan perbulan
                 </span>
               </div>
             </div>
@@ -101,7 +91,6 @@
   </div>
   <!-- /.content -->
 </div>
-
 @endsection
 @push('custom-script')
 <script src="{{ asset('assets/plugins/chart.js/Chart.min.js') }}"></script>
