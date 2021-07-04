@@ -22,4 +22,5 @@ Route::group(['middleware'=> ['AuthCheck']],function(){
     Route::view('/', 'pages.auth.login');
     Route::get('/dashboard', [LoginController::class,'dashboard']) ->name('dashboard');
     Route::get('/profile', [MainController::class, 'profile']) -> name('profile');
+    Route::get('/table', [MainController::class, 'tablekeuntungan']) -> name('table');
 });

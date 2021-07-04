@@ -84,43 +84,8 @@
           <!-- /.col-lg-6 -->
         </div>
         <!-- /card -->
-          <div class="col-12">
             <!-- /.card -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                          <tr>
-                            <th>ID Fasilitas</th>
-                            <th>ID Pengunjung</th>
-                            <th>Tanggal</th>
-                            <th>Keuntungan</th>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          @php
-                          @endphp
-                          @foreach ($destinasi as $d)
-                          <tr>
-                            <td>{{$d->facilities_id}}</td>
-                            <td>{{$d->visitors_id}}</td>
-                            <td>{{$d->tanggal}}</td>
-                            <td>{{$d->profits}}</td>
-                            @endforeach
-                          </tr>
-                        </tbody>
-                      
-                      </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
+          {{-- </div> --}}
           <!-- /.col -->
       </div>
       <!-- /.row -->
