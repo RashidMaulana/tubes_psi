@@ -92,6 +92,7 @@ class LoginController extends Controller
                                         ->join('facilities as f','transactions.facilities_id','f.id')
                                         ->join('destinations as d','f.destinations_id','d.id')
                                         ->where('d.pemiliks_id',$data->id)->groupBy('bulan')->get()->toArray();
+                                        
         $total = Transactions::join('facilities as f','transactions.facilities_id','f.id')
                              ->join('destinations as d','f.destinations_id','d.id')
                              ->where('d.pemiliks_id',$data->id)->sum('profits');
