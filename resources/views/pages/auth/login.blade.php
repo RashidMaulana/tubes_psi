@@ -23,7 +23,7 @@
       <a href="" class="h1"><b>Login</b></a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Silahkan masuk untuk melanjutkan.</p>
       <form action="{{ route('auth.check') }}" method="post">
         @if (Session::get('fail'))
             <div class="alert alert-danger">
