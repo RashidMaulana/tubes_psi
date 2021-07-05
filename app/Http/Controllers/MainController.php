@@ -23,4 +23,14 @@ class MainController extends Controller
         ->get();
         return view('datatable',['LoggedUserInfo' => $data, 'destinasi' => $destinasi]);
     }
+    function grafikpengunjung(){
+        $data = Pemilik::where('id','=',session('LoggedUser'))->first();
+
+        $visitor = Transactions::select(DB::raw('sum(visitors_id) as visitor'))
+        ->join('facilities as f','transactions.facilities_id','f.id')
+        ->join('destinations as d','f.destinations_id','d.id')
+        ->where('d.pemiliks_id',$data->id)->groupBy('bulan')->get()->toArray();
+        return view('grafik',['LoggedUserInfo' => $data, 'visitor' => $visitor]);
+
+    }
 }

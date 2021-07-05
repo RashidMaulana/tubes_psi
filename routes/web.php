@@ -23,4 +23,5 @@ Route::group(['middleware'=> ['AuthCheck']],function(){
     Route::get('/dashboard', [LoginController::class,'dashboard']) ->name('dashboard');
     Route::get('/profile', [MainController::class, 'profile']) -> name('profile');
     Route::get('/table', [MainController::class, 'tablekeuntungan']) -> name('table');
+    Route::get('/grafik', [MainController::class, 'grafikpengunjung']) -> name('grafik');
 });
