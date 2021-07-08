@@ -17,6 +17,15 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
+            <a href="{{route('profile')}}" class="nav-link">
+              <i class="nav-icon home fas fa-user"></i>
+                <p>
+                  Profil
+                </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{route('dashboard')}}" class="nav-link">
               <i class="nav-icon home fas fa-home"></i>
               <p>
